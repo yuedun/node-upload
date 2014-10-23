@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        var func1=function(callback){
+    //do something.
+
+    setTimeout(callback,0);
+    
+    
+}
+    var func2=function(){
+        for (var i = 0; i <= 100000000; i++) {
+            if (i==100000000) {
+                 console.log("callbac");
+            };
+           
+        };
+    }
+    func1(func2);
+    console.log("call");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
