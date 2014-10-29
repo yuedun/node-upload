@@ -21,7 +21,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser({uploadDir:'D:\\tmp'}));
 app.use(routes);
 app.use(users);
 

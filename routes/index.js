@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var qiniu = require('../controller/qiniu');
-var token = qiniu.uptoken();
+var token = qiniu.uptoken('hopefully');
 var router = express.Router();
 
 /* GET home page. */
