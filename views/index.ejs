@@ -7,14 +7,9 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <form method="post" action="http://upload.qiniu.com/"
+    <form method="post" action="/upload"
           enctype="multipart/form-data">
-        <input name="key" type="hidden" value="6CG6fo8XjOhLV-z7g9a-RdfntNFqFEuhTMil-3vy">
-        <input name="x:username" type="hidden" value="">
-        <input name="token" type="hidden" value="<%= token%>>">
         <input name="file" type="file" />
-        <input name="crc32" type="hidden" />
-        <input name="accept" type="hidden" />
         <input name="submit" type="submit" />
     </form>
   </body>
