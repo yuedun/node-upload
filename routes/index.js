@@ -1,36 +1,62 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var qiniu = require('../controller/qiniu');
+var formidable = require('formidable');
+var util = require('util');
+var fs = require('fs');
 var client = require('../controller/qn');
 var token = qiniu.uptoken('hopefully');
 var router = express.Router();
-
+var TITLE = 'formidable上传示例';
+var AVATAR_UPLOAD_FOLDER = '/avatar/';
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express'});
 });
-router.get("/connect",function(req, res){
-	mongoose.connect("mongodb://localhost:27017/test",function(e){
-		if (e) res.send(e.message);
-		res.send("connect yes!");
-
-	});
+/* formidable文件上传 */
+router.get('/formUpload', function(req, res) {
+  res.render('formupload', { title: TITLE});
 });
+/* formidable文件上传 */
+router.post('/toUpload', function(req, res) {
+    var form = new formidable.IncomingForm();   //创建上传表单
+    form.encoding = 'utf-8';		//设置编辑
+    form.uploadDir = 'public' + AVATAR_UPLOAD_FOLDER;	 //设置上传目录
+    form.keepExtensions = true;	 //保留后缀
+    form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
+    form.parse(req, function(err, fields, files) {
+        if (err) {
+            res.locals.error = err;
+            res.render('formupload', { title: TITLE });
+            return;
+        }
+        var extName = '';  //后缀名
+        switch (files.file.type) {
+            case 'image/pjpeg':
+                extName = 'jpg';
+                break;
+            case 'image/jpeg':
+                extName = 'jpg';
+                break;
+            case 'image/png':
+                extName = 'png';
+                break;
+            case 'image/x-png':
+                extName = 'png';
+                break;
+        }
+        if(extName.length == 0){
+            res.locals.error = '只支持png和jpg格式图片';
+            res.render('formupload', { title: TITLE });
+            return;
+        }
+        var avatarName = Math.random() + '.' + extName;
+        var newPath = form.uploadDir + avatarName;
 
-router.post('/upload', function(req, res){
-    // upload a file with custom key
-    client.uploadFile('C:\Users\huopanpan\Pictures\sdfsd.jpg', {key: 'qn/lib/client.js'}, function (err, result) {
-        console.log(result);
-        // {
-        //   hash: 'FhGbwBlFASLrZp2d16Am2bP5A9Ut',
-        //   key: 'qn/lib/client.js',
-        //   url: 'http://qtestbucket.qiniudn.com/qn/lib/client.js'
-        //   "x:ctime": "1378150371",
-        //   "x:filename": "client.js",
-        //   "x:mtime": "1378150359",
-        //   "x:size": "21944",
-        // }
+        console.log('newPath:'+newPath);
+        fs.renameSync(files.file.path, newPath);  //重命名
     });
-    res.render('index', {title:"express"});
+    res.locals.success = '上传成功';
+    res.render('formupload', { title: TITLE });
 });
+
 module.exports = router;

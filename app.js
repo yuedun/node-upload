@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var ejs = require('ejs');
 var favicon = require('serve-favicon');//图标组件由static-favicon改为serve-favicon
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -12,7 +13,8 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('.html', ejs.__express);
+app.set('view engine', 'html');
 
 app.use(favicon(path.join(__dirname,'public/images/asd.ico')));
 app.use(logger('dev'));
