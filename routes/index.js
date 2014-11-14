@@ -4,7 +4,7 @@ var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs');
 var client = require('../controller/qn');
-var token = qiniu.uptoken('hopefully','localhost:3000/success','');
+var token = qiniu.uptoken('hopefully','localhost:3000/success','x:username=hope');
 var router = express.Router();
 var TITLE = 'formidable上传示例';
 var AVATAR_UPLOAD_FOLDER = '/avatar/';
