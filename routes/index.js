@@ -4,13 +4,19 @@ var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs');
 var client = require('../controller/qn');
-var token = qiniu.uptoken('hopefully');
+var token = qiniu.uptoken('hopefully','localhost:3000/success','');
 var router = express.Router();
 var TITLE = 'formidable上传示例';
 var AVATAR_UPLOAD_FOLDER = '/avatar/';
-/* GET home page. */
+/* GET home page.七牛上传 */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express'});
+    console.log("token:"+token);
+    res.render('index', { title: '七牛文件上传测试',token: token, username:'hope'});
+});
+/* 上传成功后调用的地址 */
+router.post('/success', function(req, res) {
+    var username = req.body.username;
+    res.write('{"success":true,"username":"'+username+'"}');
 });
 /* formidable文件上传 */
 router.get('/formUpload', function(req, res) {

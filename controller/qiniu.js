@@ -10,16 +10,16 @@ qiniu.conf.SECRET_KEY = secretKey;
 var qiniuObj ={};
 // @endgist
 
-// @gist uptoken
-qiniuObj.uptoken = function uptoken(bucketname) {
-    var putPolicy = new qiniu.rs.PutPolicy(bucketname);
-    //putPolicy.callbackUrl = callbackUrl;
-    //putPolicy.callbackBody = callbackBody;
+// @gist uptoken获取token
+qiniuObj.uptoken = function uptoken(bucketname, callbackUrl, callbackBody) {
+    var putPolicy = new qiniu.rs.PutPolicy(bucketname);//只传递一个参数实际上是scope(bucket),其余参数暂不指定
+    putPolicy.callbackUrl = callbackUrl;//回调地址，即上传成功后七牛服务器调用我的服务器地址
+    putPolicy.callbackBody = callbackBody;
     //putPolicy.returnUrl = returnUrl;
     //putPolicy.returnBody = returnBody;
     //putPolicy.asyncOps = asyncOps;
-    //putPolicy.expires = expires;
-
+    //putPolicy.expires = expires;//uptoken过期时间，默认3600s=1小时
+    putPolicy.getFlags(putPolicy);
     return putPolicy.token();
 }
 // @endgist
