@@ -2,8 +2,8 @@
  * Created by huopanpan on 2014/10/22.
  */
 var qiniu = require('qiniu');
-var accessKey = '6CG6fo8XjOhLV-z7g9a-RdfntNFqFEuhTMil-3vy';
-var secretKey = 'NxeiNiy1DATcwu_BBrYQCb8GxVREalSHZi7hSzJ9';
+var accessKey = '6CG6fo8XjOhLV-z7g9a-RdfntNFqFEuhTMil-3vz';
+var secretKey = 'NxeiNiy1DATcwu_BBrYQCb8GxVREalSHZi7hSzJ0';
 // @gist init
 qiniu.conf.ACCESS_KEY = accessKey;
 qiniu.conf.SECRET_KEY = secretKey;

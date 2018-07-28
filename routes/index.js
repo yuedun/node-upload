@@ -3,7 +3,7 @@ var qiniu = require('../controller/qiniu');
 var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs');
-var client = require('../controller/qn');
+// var client = require('../controller/qn');
 var token = qiniu.uptoken('hopefully','http://localhost:3000/success','x:username=hope');
 var router = express.Router();
 var TITLE = 'formidable上传示例';
