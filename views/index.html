@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
-        <ul>
-            <li>
-                <input id="token" name="token" hidden="true" value="<%= token%>">
-                <input name="x:username" hidden="true" value="<%= username%>">
-            </li>
-            <li>
-                <label for="file">照片:</label>
-                <input id="file" name="file" class="ipt" type="file" />
-            </li>
-            <li>
-                <input type="submit" value="提交">
-            </li>
-        </ul>
-    </form>
-  </body>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+  <form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
+    <ul>
+      <li>
+        <input id="token" name="token" hidden="true" value="<%= token%>">
+        <input name="x:username" hidden="true" value="<%= username%>">
+      </li>
+      <li>
+        <label for="file">照片:</label>
+        <input id="file" name="file" class="ipt" type="file" />
+      </li>
+      <li>
+        <input type="submit" value="提交">
+      </li>
+    </ul>
+  </form>
+</body>
+
 </html>
